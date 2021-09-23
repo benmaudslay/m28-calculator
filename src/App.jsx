@@ -8,24 +8,39 @@ import { Display } from "./components/Display";
 
 const App = () => {
   const [total, setTotal] = useState([0]);
+  const [error, setError] = useState(false);
 
   const handleClick = (val) => {
-    if (val === "clear") {
-      setTotal([0]);
-    } else if (val === "=") {
-      let currentStr = total.join("");
-      let newTotal = evaluate(currentStr);
-      // limit number of chars for new total
-      setTotal(newTotal);
-    } else {
-      let newTotal = [...total, val];
-      if (total[0] === 0) {
-        newTotal.shift();
+    try {
+      if (val === undefined) {
+        throw new Error("Value not defined")
+      } else if (val === "clear") {
+        setTotal([0]);
+      } else if (val === "=") {
+        let currentStr = total.join("");
+        let newTotal = evaluate(currentStr);
+        // limit number of chars for new total
+        setTotal([newTotal]);
+      } else {
+        let newTotal = [...total, val];
+        if (total[0] === 0) {
+          newTotal.shift();
+        }
+        setTotal(newTotal);
       }
-      setTotal(newTotal);
+    } catch (error) {
+      console.log(error);
+      setError(true)
     }
   };
 
+  if (error) {
+    return (
+      <div className="Wrapper">
+        <h1>We encountered an error</h1>
+      </div>
+    );
+  }
   return (
     <div className="wrapper">
       <h1>React Calculator</h1>
