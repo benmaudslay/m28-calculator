@@ -13,7 +13,7 @@
   { "val": 2, "style": "num" },
   { "val": 3, "style": "num" },
   { "val": "+", "style": "operator" },
-  { "val": 0, "style": "clear wide" },
+  { "val": 0, "style": "zero" },
   { "val": ".", "style": "num" },
   { "val": "=", "style": "operator" }
 ]
